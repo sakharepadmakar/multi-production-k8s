@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1beta1
+# UPDATE THE API
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    # ADD THIS LINE ABOVE
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    # UPDATE THIS LINE ABOVE
+spec:
+  rules:
+    - tcp:
+        paths:
+          - backend:
+              serviceName: haproxy-cluster-ip-service
+              servicePort: 6379

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haproxy-deployment
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      component: haproxy
+  template:
+    metadata:
+      labels:
+        component: haproxy
+    spec:
+      containers:
+        - name: haproxy
+          image: paddy27/haproxy:latest
+          ports:
+            - containerPort: 6379
